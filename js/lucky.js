@@ -1,42 +1,72 @@
-const participantName =
-document.getElementById("participantName");
+import { db } from "./firebase.js";
 
-const numberDisplay =
-document.getElementById("numberDisplay");
+import {
+    collection,
+    addDoc,
+    getDocs,
+    query
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-const drawBtn =
-document.getElementById("drawBtn");
+const participantName = document.getElementById("participantName");
+const numberDisplay = document.getElementById("numberDisplay");
+const drawBtn = document.getElementById("drawBtn");
 
 participantName.textContent =
-localStorage.getItem("participantName") || "Peserta";
+    localStorage.getItem("participantName") || "Peserta";
 
-let alreadyDraw = false;
-
-drawBtn.onclick = () => {
-
-    if(alreadyDraw) return;
-
-    alreadyDraw = true;
+drawBtn.onclick = async () => {
 
     drawBtn.disabled = true;
 
-    numberDisplay.classList.add("active");
+    const snapshot = await getDocs(
+        query(collection(db, "participants"))
+    );
+
+    const usedNumbers = [];
+
+    snapshot.forEach(doc => {
+
+        usedNumbers.push(doc.data().luckyNumber);
+
+    });
+
+    const available = [];
+
+    for(let i=1;i<=100;i++){
+
+        if(!usedNumbers.includes(i)){
+
+            available.push(i);
+
+        }
+
+    }
+
+    if(available.length===0){
+
+        alert("Nomor sudah habis.");
+
+        return;
+
+    }
 
     let interval = setInterval(()=>{
 
-        let random = Math.floor(Math.random()*100)+1;
-
         numberDisplay.innerHTML =
-        random.toString().padStart(2,"0");
+        Math.floor(Math.random()*100+1)
+        .toString()
+        .padStart(2,"0");
 
     },60);
 
-    setTimeout(()=>{
+    setTimeout(async()=>{
 
         clearInterval(interval);
 
-        let lucky =
-        Math.floor(Math.random()*100)+1;
+        const lucky =
+        available[
+            Math.floor(Math.random()*available.length)
+        ];
 
         numberDisplay.innerHTML =
         lucky.toString().padStart(2,"0");
@@ -44,15 +74,26 @@ drawBtn.onclick = () => {
         confetti({
 
             particleCount:250,
-
-            spread:150,
-
-            origin:{y:.6}
+            spread:150
 
         });
+
+        await addDoc(
+            collection(db,"participants"),
+            {
+
+                name:
+                participantName.textContent,
+
+                luckyNumber:lucky,
+
+                createdAt:new Date()
+
+            }
+        );
 
         drawBtn.innerHTML="SELESAI";
 
     },3000);
 
-};
+}
