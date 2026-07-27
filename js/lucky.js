@@ -1,13 +1,18 @@
-const participantName = document.getElementById("participantName");
-const numberDisplay = document.getElementById("numberDisplay");
-const drawBtn = document.getElementById("drawBtn");
+const participantName =
+document.getElementById("participantName");
 
-participantName.innerText =
-    localStorage.getItem("participantName") || "Peserta";
+const numberDisplay =
+document.getElementById("numberDisplay");
+
+const drawBtn =
+document.getElementById("drawBtn");
+
+participantName.textContent =
+localStorage.getItem("participantName") || "Peserta";
 
 let alreadyDraw = false;
 
-drawBtn.addEventListener("click", () => {
+drawBtn.onclick = () => {
 
     if(alreadyDraw) return;
 
@@ -15,37 +20,39 @@ drawBtn.addEventListener("click", () => {
 
     drawBtn.disabled = true;
 
-    let counter = 0;
+    numberDisplay.classList.add("active");
 
-    const interval = setInterval(() => {
+    let interval = setInterval(()=>{
 
-        numberDisplay.innerText =
-            Math.floor(Math.random()*100)+1;
+        let random = Math.floor(Math.random()*100)+1;
 
-        counter++;
+        numberDisplay.innerHTML =
+        random.toString().padStart(2,"0");
 
-    },80);
+    },60);
 
     setTimeout(()=>{
 
         clearInterval(interval);
 
-        const luckyNumber =
-            Math.floor(Math.random()*100)+1;
+        let lucky =
+        Math.floor(Math.random()*100)+1;
 
-        numberDisplay.innerText = luckyNumber;
+        numberDisplay.innerHTML =
+        lucky.toString().padStart(2,"0");
 
-        if(typeof confetti === "function"){
+        confetti({
 
-            confetti({
-                particleCount:180,
-                spread:120
-            });
+            particleCount:250,
 
-        }
+            spread:150,
 
-        drawBtn.innerText = "SELESAI";
+            origin:{y:.6}
+
+        });
+
+        drawBtn.innerHTML="SELESAI";
 
     },3000);
 
-});
+};
