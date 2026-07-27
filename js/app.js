@@ -2,6 +2,9 @@ import { db } from "./firebase.js";
 
 import {
     collection,
+    query,
+    where,
+    getDocs,
     addDoc,
     serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
@@ -14,7 +17,24 @@ startBtn.onclick = async () => {
 
     if(name===""){
 
-        alert("Masukkan nama");
+        alert("Masukkan nama.");
+
+        return;
+
+    }
+
+    const q = query(
+        collection(db,"participants"),
+        where("name","==",name)
+    );
+
+    const result = await getDocs(q);
+
+    if(!result.empty){
+
+        localStorage.setItem("participantName",name);
+
+        location.href="lucky.html";
 
         return;
 
@@ -26,9 +46,11 @@ startBtn.onclick = async () => {
 
         {
 
-            name:name,
+            name,
 
             luckyNumber:null,
+
+            status:"waiting",
 
             createdAt:serverTimestamp()
 
