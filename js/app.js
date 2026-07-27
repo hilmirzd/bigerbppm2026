@@ -1,16 +1,19 @@
-const startBtn = document.getElementById("startBtn");
+const startBtn=document.getElementById("startBtn");
 
-startBtn.addEventListener("click", () => {
+startBtn.onclick=()=>{
 
-    const name = document.getElementById("name").value.trim();
+    const name=document.getElementById("name").value.trim();
 
-    if(name === ""){
-        alert("Silakan masukkan nama.");
+    if(name===""){
+
+        alert("Masukkan nama terlebih dahulu");
+
         return;
+
     }
 
-    localStorage.setItem("participantName", name);
+    localStorage.setItem("participantName",name);
 
-    window.location.href = "lucky.html";
+    location.href="lucky.html";
 
-});
+}
