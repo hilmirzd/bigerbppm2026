@@ -1,49 +1,57 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Lucky Number | BIGER BPPM 2026</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="css/lucky.css">
+<title>Lucky Number</title>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
 </head>
+
 <body>
 
-    <div class="container">
+<div class="background"></div>
 
-        <div class="card">
+<div class="container">
 
-            <h1>BIGER BPPM 2026</h1>
+<div class="card lucky-card">
 
-            <p class="welcome">
-                Halo,
-                <span id="participantName">Peserta</span> 👋
-            </p>
+<img src="assets/logo.png" class="logo">
 
-            <div id="numberDisplay" class="number-display">
-                ?
-            </div>
+<h2>BIGER BPPM 2026</h2>
 
-            <button id="drawBtn">
-                🎲 AMBIL LUCKY NUMBER
-            </button>
+<p class="welcome">
 
-            <p class="info">
-                Setiap peserta hanya dapat mengambil 1 Lucky Number.
-            </p>
+Halo,
 
-        </div>
+<b id="participantName"></b>
 
-    </div>
+</p>
 
-    <!-- Confetti -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<div id="numberDisplay" class="number">
 
-    <script src="js/lucky.js"></script>
+00
+
+</div>
+
+<button id="drawBtn">
+
+🎲 AMBIL LUCKY NUMBER
+
+</button>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+<script src="js/lucky.js"></script>
 
 </body>
 </html>
