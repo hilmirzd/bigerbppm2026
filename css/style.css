@@ -155,3 +155,65 @@ button:hover{
     }
 
 }
+
+.lucky-card{
+
+    max-width:500px;
+
+}
+
+.welcome{
+
+    margin-top:15px;
+
+    margin-bottom:30px;
+
+}
+
+.number{
+
+    width:220px;
+
+    height:220px;
+
+    margin:30px auto;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:72px;
+
+    font-weight:800;
+
+    color:#F2C94C;
+
+    border:4px solid #F2C94C;
+
+    transition:.3s;
+
+    box-shadow:
+
+    0 0 15px rgba(242,201,76,.5);
+
+}
+
+.number.active{
+
+    transform:scale(1.08);
+
+    box-shadow:
+
+    0 0 50px #F2C94C;
+
+}
+
+#drawBtn{
+
+    margin-top:20px;
+
+}
