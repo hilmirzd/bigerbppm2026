@@ -1,4 +1,4 @@
-<script type="module" src="js/app.js"></script>
+import { db } from "./firebase.js";
 
 import {
     collection,
