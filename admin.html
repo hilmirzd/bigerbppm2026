@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard | BIGER BPPM 2026</title>
+
+    <link rel="stylesheet" href="css/admin.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>🎉 BIGER BPPM 2026</h1>
+        <h2>Lucky Number Dashboard</h2>
+    </header>
+
+    <div class="summary">
+
+        <div class="card">
+            <h3>Total Peserta</h3>
+            <span id="totalParticipant">0</span>
+        </div>
+
+        <div class="card">
+            <h3>Nomor Terpakai</h3>
+            <span id="usedNumber">0</span>
+        </div>
+
+        <div class="card">
+            <h3>Nomor Tersisa</h3>
+            <span id="remainingNumber">100</span>
+        </div>
+
+    </div>
+
+    <div class="toolbar">
+
+        <input
+            type="text"
+            id="search"
+            placeholder="Cari nama peserta..."
+        >
+
+        <button id="exportBtn">
+            Export Excel
+        </button>
+
+    </div>
+
+    <table>
+
+        <thead>
+
+        <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>Lucky Number</th>
+            <th>Waktu</th>
+        </tr>
+
+        </thead>
+
+        <tbody id="tableBody">
+
+        <!-- Data Firebase akan muncul di sini -->
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<script src="js/admin.js"></script>
+
+</body>
+</html>
