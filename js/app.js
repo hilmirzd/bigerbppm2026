@@ -11,55 +11,53 @@ import {
 
 const startBtn = document.getElementById("startBtn");
 
-startBtn.onclick = async () => {
+startBtn.addEventListener("click", async () => {
 
-    const name = document.getElementById("name").value.trim();
+    const input = document.getElementById("name");
+    const name = input.value.trim();
 
-    if(name===""){
-
-        alert("Masukkan nama.");
-
+    if (!name) {
+        alert("Masukkan nama peserta.");
         return;
-
     }
 
-    const q = query(
-        collection(db,"participants"),
-        where("name","==",name)
-    );
+    try {
 
-    const result = await getDocs(q);
+        const q = query(
+            collection(db, "participants"),
+            where("name", "==", name)
+        );
 
-    if(!result.empty){
+        const snapshot = await getDocs(q);
 
-        localStorage.setItem("participantName",name);
+        if (!snapshot.empty) {
 
-        location.href="lucky.html";
+            localStorage.setItem("participantName", name);
 
-        return;
+            window.location.href = "lucky.html";
 
-    }
-
-    await addDoc(
-
-        collection(db,"participants"),
-
-        {
-
-            name,
-
-            luckyNumber:null,
-
-            status:"waiting",
-
-            createdAt:serverTimestamp()
-
+            return;
         }
 
-    );
+        await addDoc(collection(db, "participants"), {
 
-    localStorage.setItem("participantName",name);
+            name: name,
+            luckyNumber: null,
+            status: "waiting",
+            createdAt: serverTimestamp()
 
-    location.href="lucky.html";
+        });
 
-}
+        localStorage.setItem("participantName", name);
+
+        window.location.href = "lucky.html";
+
+    } catch (err) {
+
+        console.error(err);
+
+        alert("Gagal menyimpan data.");
+
+    }
+
+});
