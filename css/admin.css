@@ -36,3 +36,34 @@
     margin-bottom:30px;
 
 }
+/* =====================
+   RAPATKAN TROPHY & TITLE
+===================== */
+
+.trophy{
+
+    font-size:80px;
+
+    line-height:1;
+
+    margin:0 0 5px;
+
+    animation:bounce 1.5s infinite;
+
+}
+
+
+.winner-card h2{
+
+    margin-top:0;
+
+    margin-bottom:15px;
+
+}
+
+
+.winner-name{
+
+    margin-top:15px;
+
+}
