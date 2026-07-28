@@ -6,13 +6,48 @@ import {
     orderBy,
     onSnapshot,
     doc,
-    updateDoc
+    setDoc
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+// =========================
+// ELEMENT
+// =========================
 
 const tableBody = document.getElementById("tableBody");
 const totalParticipant = document.getElementById("totalParticipant");
 const usedNumber = document.getElementById("usedNumber");
 const remainingNumber = document.getElementById("remainingNumber");
+
+const initBtn = document.getElementById("initBtn");
+
+// =========================
+// INITIALIZE 1-60
+// =========================
+
+initBtn.addEventListener("click", async () => {
+
+    if (!confirm("Initialize Lucky Number 1-60 ?")) return;
+
+    const numbers = [];
+
+    for (let i = 1; i <= 60; i++) {
+        numbers.push(i);
+    }
+
+    await setDoc(
+        doc(db, "config", "lottery"),
+        {
+            availableNumbers: numbers
+        }
+    );
+
+    alert("Initialize berhasil.");
+
+});
+
+// =========================
+// TABLE
+// =========================
 
 const q = query(
     collection(db, "participants"),
@@ -25,7 +60,7 @@ onSnapshot(q, (snapshot) => {
 
     totalParticipant.textContent = snapshot.size;
     usedNumber.textContent = snapshot.size;
-    remainingNumber.textContent = 100 - snapshot.size;
+    remainingNumber.textContent = 60 - snapshot.size;
 
     let no = 1;
 
@@ -49,56 +84,5 @@ onSnapshot(q, (snapshot) => {
         `;
 
     });
-
-});
-
-const resetBtn = document.getElementById("resetBtn");
-
-resetBtn.addEventListener("click", async () => {
-
-    const yakin = confirm(
-        "Yakin ingin menghapus seluruh peserta?"
-    );
-
-    if (!yakin) return;
-
-    const snapshot = await getDocs(collection(db, "participants"));
-
-    const promises = [];
-
-    snapshot.forEach((item) => {
-        promises.push(deleteDoc(doc(db, "participants", item.id)));
-    });
-
-    await Promise.all(promises);
-
-    alert("Semua data berhasil dihapus.");
-
-});
-
-const initBtn = document.getElementById("initBtn");
-
-initBtn.addEventListener("click", async () => {
-
-    const ok = confirm(
-        "Initialize Lucky Number 1-60?"
-    );
-
-    if (!ok) return;
-
-    const numbers = [];
-
-    for (let i = 1; i <= 60; i++) {
-        numbers.push(i);
-    }
-
-    await updateDoc(
-        doc(db, "config", "lottery"),
-        {
-            availableNumbers: numbers
-        }
-    );
-
-    alert("Lucky Number berhasil diinitialize.");
 
 });
