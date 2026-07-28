@@ -1,99 +1,47 @@
-import { db } from "./firebase.js";
+const participantName =
+document.getElementById("participantName");
 
-import {
-    collection,
-    addDoc,
-    getDocs,
-    query
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+const numberDisplay =
+document.getElementById("numberDisplay");
 
-const participantName = document.getElementById("participantName");
-const numberDisplay = document.getElementById("numberDisplay");
-const drawBtn = document.getElementById("drawBtn");
+const drawBtn =
+document.getElementById("drawBtn");
 
 participantName.textContent =
-    localStorage.getItem("participantName") || "Peserta";
+localStorage.getItem("participantName") || "-";
 
-drawBtn.onclick = async () => {
+const luckyNumber =
+localStorage.getItem("luckyNumber");
+
+drawBtn.onclick = () => {
 
     drawBtn.disabled = true;
 
-    const snapshot = await getDocs(
-        query(collection(db, "participants"))
-    );
-
-    const usedNumbers = [];
-
-    snapshot.forEach(doc => {
-
-        usedNumbers.push(doc.data().luckyNumber);
-
-    });
-
-    const available = [];
-
-    for(let i=1;i<=100;i++){
-
-        if(!usedNumbers.includes(i)){
-
-            available.push(i);
-
-        }
-
-    }
-
-    if(available.length===0){
-
-        alert("Nomor sudah habis.");
-
-        return;
-
-    }
-
-    let interval = setInterval(()=>{
+    let interval = setInterval(() => {
 
         numberDisplay.innerHTML =
-        Math.floor(Math.random()*100+1)
+        Math.floor(Math.random()*60+1)
         .toString()
         .padStart(2,"0");
 
     },60);
 
-    setTimeout(async()=>{
+    setTimeout(()=>{
 
         clearInterval(interval);
 
-        const lucky =
-        available[
-            Math.floor(Math.random()*available.length)
-        ];
-
         numberDisplay.innerHTML =
-        lucky.toString().padStart(2,"0");
+        luckyNumber.padStart(2,"0");
 
         confetti({
 
             particleCount:250,
-            spread:150
+            spread:180
 
         });
-
-        await addDoc(
-            collection(db,"participants"),
-            {
-
-                name:
-                participantName.textContent,
-
-                luckyNumber:lucky,
-
-                createdAt:new Date()
-
-            }
-        );
 
         drawBtn.innerHTML="SELESAI";
 
     },3000);
 
-}
+};
