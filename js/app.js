@@ -1,12 +1,11 @@
 import { db } from "./firebase.js";
 
 import {
-  collection,
-  query,
-  where,
-  getDocs,
-  addDoc,
-  serverTimestamp
+    doc,
+    getDoc,
+    setDoc,
+    runTransaction,
+    serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const startBtn = document.getElementById("startBtn");
