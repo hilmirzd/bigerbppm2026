@@ -267,7 +267,20 @@ button:hover{
    INDEX & LUCKY PAGE
 ===================== */
 
+/* =====================
+   MOBILE RESPONSIVE
+   INDEX & LUCKY PAGE
+===================== */
+
 @media(max-width:600px){
+
+
+body{
+
+    overflow:auto;
+
+}
+
 
 
 .container{
@@ -276,7 +289,7 @@ button:hover{
 
     min-height:100vh;
 
-    padding:20px;
+    padding:25px 15px;
 
 }
 
@@ -286,9 +299,9 @@ button:hover{
 
     width:100%;
 
-    max-width:360px;
+    max-width:330px;
 
-    padding:30px 25px;
+    padding:30px 20px;
 
     border-radius:20px;
 
@@ -298,9 +311,11 @@ button:hover{
 
 .logo{
 
-    width:220px;
+    width:190px;
 
-    margin-bottom:15px;
+    margin:0 auto 20px;
+
+    display:block;
 
 }
 
@@ -310,7 +325,7 @@ h2{
 
     font-size:24px;
 
-    margin-bottom:10px;
+    margin-bottom:15px;
 
 }
 
@@ -320,6 +335,8 @@ p{
 
     font-size:14px;
 
+    line-height:1.5;
+
     margin-bottom:20px;
 
 }
@@ -328,15 +345,21 @@ p{
 
 input{
 
+    width:100%;
+
     padding:14px;
 
     font-size:15px;
+
+    margin-bottom:15px;
 
 }
 
 
 
 button{
+
+    width:100%;
 
     padding:14px;
 
@@ -348,7 +371,9 @@ button{
 
 .lucky-card{
 
-    max-width:360px;
+    width:100%;
+
+    max-width:330px;
 
 }
 
@@ -364,15 +389,15 @@ button{
 
 
 
-/* Nomor Lucky */
+/* LUCKY NUMBER */
 
 .number{
 
-    width:160px;
+    width:150px;
 
-    height:160px;
+    height:150px;
 
-    font-size:52px;
+    font-size:48px;
 
     margin:20px auto;
 
@@ -380,6 +405,14 @@ button{
 
 
 
+.number.active{
+
+    transform:scale(1.05);
+
+}
+
+
+
 #drawBtn{
 
     margin-top:15px;
@@ -387,105 +420,18 @@ button{
 }
 
 
+
+/* FOOTER */
 
 .copyright{
 
-    bottom:10px;
+    position:fixed;
 
-    font-size:12px;
+    bottom:8px;
 
-}
-
-
-}
-
-/* =====================
-   MOBILE SPACING FIX
-===================== */
-
-@media(max-width:600px){
-
-
-.card{
-
-    padding:35px 25px;
+    font-size:11px;
 
 }
-
-
-
-.logo{
-
-    width:200px;
-
-    margin-bottom:25px;
-
-}
-
-
-
-h2{
-
-    margin-bottom:20px;
-
-}
-
-
-
-p{
-
-    line-height:1.6;
-
-    margin-bottom:25px;
-
-}
-
-
-
-input{
-
-    margin-bottom:20px;
-
-}
-
-
-
-button{
-
-    margin-top:5px;
-
-}
-
-
-
-.lucky-card .welcome{
-
-    margin-top:15px;
-
-    margin-bottom:30px;
-
-}
-
-
-
-.number{
-
-    width:170px;
-
-    height:170px;
-
-    margin:30px auto;
-
-}
-
-
-
-#drawBtn{
-
-    margin-top:25px;
-
-}
-
 
 
 }
