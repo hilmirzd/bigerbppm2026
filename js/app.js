@@ -12,94 +12,83 @@ const startBtn = document.getElementById("startBtn");
 
 startBtn.addEventListener("click", async () => {
 
-    console.count("START BUTTON");
-
     const name = document.getElementById("name").value.trim();
-
 
     if (!name) {
         alert("Masukkan nama peserta.");
         return;
     }
 
+    startBtn.disabled = true;
+    startBtn.innerText = "Memproses...";
+
     try {
 
-        // Cek apakah nama sudah pernah daftar
-        const q = query(
-            collection(db, "participants"),
-            where("name", "==", name)
-        );
+        const participantRef = doc(db, "participants", name);
 
-        const existing = await getDocs(q);
+        const participantSnap = await getDoc(participantRef);
 
-        if (!existing.empty) {
+        if (participantSnap.exists()) {
 
-            alert("Nama sudah terdaftar.");
+            const data = participantSnap.data();
 
-            localStorage.setItem("participantName", name);
+            localStorage.setItem("participantName", data.name);
+            localStorage.setItem("luckyNumber", data.luckyNumber);
 
-            window.location.href = "lucky.html";
+            location.href = "lucky.html";
 
             return;
         }
 
-        // Ambil semua nomor yang sudah dipakai
-        const snapshot = await getDocs(collection(db, "participants"));
+        const lotteryRef = doc(db, "config", "lottery");
 
-        const usedNumbers = [];
+        const luckyNumber = await runTransaction(db, async (transaction) => {
 
-        snapshot.forEach(doc => {
-            usedNumbers.push(doc.data().luckyNumber);
-        });
+            const lotterySnap = await transaction.get(lotteryRef);
 
-        // Cari nomor yang masih tersedia
-        const availableNumbers = [];
-
-        for (let i = 1; i <= 100; i++) {
-
-            if (!usedNumbers.includes(i)) {
-
-                availableNumbers.push(i);
-
+            if (!lotterySnap.exists()) {
+                throw new Error("Lottery belum diinitialize.");
             }
 
-        }
+            const numbers = lotterySnap.data().availableNumbers;
 
-        if (availableNumbers.length === 0) {
+            if (numbers.length === 0) {
+                throw new Error("Lucky Number sudah habis.");
+            }
 
-            alert("Lucky Number sudah habis.");
+            const randomIndex = Math.floor(Math.random() * numbers.length);
 
-            return;
+            const number = numbers[randomIndex];
 
-        }
+            numbers.splice(randomIndex, 1);
 
-        // Ambil satu nomor secara acak
-        const luckyNumber =
-            availableNumbers[
-                Math.floor(Math.random() * availableNumbers.length)
-            ];
+            transaction.update(lotteryRef, {
+                availableNumbers: numbers
+            });
 
-        // Simpan ke Firestore
-        await addDoc(collection(db, "participants"), {
+            transaction.set(participantRef, {
+                name: name,
+                luckyNumber: number,
+                createdAt: serverTimestamp()
+            });
 
-            name: name,
-            luckyNumber: luckyNumber,
-            createdAt: serverTimestamp()
+            return number;
 
         });
 
-        // Simpan ke browser
         localStorage.setItem("participantName", name);
         localStorage.setItem("luckyNumber", luckyNumber);
 
-        // Pindah ke halaman hasil
-        window.location.href = "lucky.html";
+        location.href = "lucky.html";
 
-    } catch (error) {
+    } catch (err) {
 
-        console.error(error);
+        console.error(err);
 
-        alert("Terjadi kesalahan.");
+        alert(err.message);
+
+        startBtn.disabled = false;
+        startBtn.innerText = "DAFTAR";
 
     }
 
