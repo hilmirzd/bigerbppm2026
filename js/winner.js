@@ -127,16 +127,65 @@ Math.random()*kandidat.length
 
 document.getElementById("winnerName")
 .innerHTML =
+winner.name;
 
-`
-${winner.name}
 
-<br>
+document.getElementById("winnerNumber")
+.innerHTML =
+"🎟 Lucky Number : " + winner.luckyNumber;
 
-<span style="font-size:20px">
-Lucky Number : ${winner.luckyNumber}
-</span>
-`;
+
+
+// CONFETTI 🎉
+
+confetti({
+
+particleCount:200,
+
+spread:120,
+
+origin:{
+y:0.6
+}
+
+});
+
+
+// tambahan ledakan kedua
+
+setTimeout(()=>{
+
+confetti({
+
+particleCount:100,
+
+angle:60,
+
+spread:80,
+
+origin:{
+x:0
+}
+
+});
+
+
+confetti({
+
+particleCount:100,
+
+angle:120,
+
+spread:80,
+
+origin:{
+x:1
+}
+
+});
+
+
+},500);
 
 
 
