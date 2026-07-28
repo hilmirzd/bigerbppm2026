@@ -1,9 +1,314 @@
-/* ==========================
-   FIX ADMIN & WINNER DESIGN
-========================== */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
 
 
-/* BACKGROUND WINNER */
+body{
+
+    background:#111;
+
+    color:#fff;
+
+    min-height:100vh;
+
+}
+
+
+
+/* =====================
+ADMIN DASHBOARD
+===================== */
+
+
+.container{
+
+    width:95%;
+
+    max-width:1400px;
+
+    margin:40px auto;
+
+}
+
+
+
+header{
+
+    text-align:center;
+
+    margin-bottom:35px;
+
+}
+
+
+
+header h1{
+
+    color:#f5c542;
+
+    font-size:42px;
+
+    font-weight:800;
+
+}
+
+
+
+header h2{
+
+    color:#ddd;
+
+    margin-top:8px;
+
+    font-weight:400;
+
+}
+
+
+
+.summary{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:20px;
+
+    margin-bottom:30px;
+
+}
+
+
+
+.card{
+
+    background:#1e1e1e;
+
+    border-radius:16px;
+
+    padding:25px;
+
+    text-align:center;
+
+    border:1px solid rgba(255,255,255,.08);
+
+}
+
+
+
+.card h3{
+
+    color:#aaa;
+
+    margin-bottom:12px;
+
+    font-size:16px;
+
+    font-weight:500;
+
+}
+
+
+
+.card span{
+
+    font-size:42px;
+
+    color:#f5c542;
+
+    font-weight:700;
+
+}
+
+
+
+.toolbar{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-bottom:25px;
+
+    flex-wrap:wrap;
+
+}
+
+
+
+.toolbar input{
+
+    flex:1;
+
+    min-width:250px;
+
+    padding:14px 18px;
+
+    border:none;
+
+    border-radius:10px;
+
+    font-size:16px;
+
+}
+
+
+
+.toolbar button{
+
+    border:none;
+
+    border-radius:10px;
+
+    padding:14px 22px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    transition:.2s;
+
+}
+
+
+
+#initBtn{
+
+    background:#ff9800;
+
+    color:white;
+
+}
+
+
+
+#exportBtn{
+
+    background:#2196f3;
+
+    color:white;
+
+}
+
+
+
+#resetBtn{
+
+    background:#e53935;
+
+    color:white;
+
+}
+
+
+
+#winnerBtn{
+
+    background:#f5c542;
+
+    color:#111;
+
+}
+
+
+
+.toolbar button:hover{
+
+    transform:translateY(-2px);
+
+    opacity:.9;
+
+}
+
+
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    background:#1b1b1b;
+
+    border-radius:14px;
+
+    overflow:hidden;
+
+}
+
+
+
+thead{
+
+    background:#f5c542;
+
+    color:#111;
+
+}
+
+
+
+thead th{
+
+    padding:16px;
+
+    font-size:15px;
+
+}
+
+
+
+tbody td{
+
+    padding:15px;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+    text-align:center;
+
+}
+
+
+
+tbody tr:hover{
+
+    background:#262626;
+
+}
+
+
+
+tbody td:nth-child(2){
+
+    text-align:left;
+
+    font-weight:500;
+
+}
+
+
+
+tbody td:nth-child(3){
+
+    font-size:22px;
+
+    color:#f5c542;
+
+    font-weight:700;
+
+}
+
+
+
+/* =====================
+BACKGROUND
+===================== */
+
 
 .background{
 
@@ -12,11 +317,14 @@
     inset:0;
 
     background:
+
     linear-gradient(
         rgba(0,0,0,.45),
         rgba(0,0,0,.45)
     ),
+
     url("../background.png");
+
 
     background-size:cover;
 
@@ -28,11 +336,9 @@
 
 }
 
-
-
-/* ==========================
-   WINNER PAGE
-========================== */
+/* =====================
+WINNER PAGE
+===================== */
 
 
 .winner-container{
@@ -77,6 +383,7 @@
 
 
 
+
 .winner-card .logo{
 
     width:280px;
@@ -89,17 +396,19 @@
 
 
 
+
 .trophy{
 
     font-size:80px;
 
     line-height:1;
 
-    margin:0 0 5px;
+    margin:0 0 10px;
 
     animation:bounce 1.5s infinite;
 
 }
+
 
 
 
@@ -114,6 +423,7 @@
     margin:5px 0 20px;
 
 }
+
 
 
 
@@ -145,6 +455,7 @@
 
 
 
+
 .winner-number{
 
     color:white;
@@ -156,6 +467,7 @@
     margin-bottom:30px;
 
 }
+
 
 
 
@@ -179,6 +491,8 @@
 
     cursor:pointer;
 
+    transition:.3s;
+
 }
 
 
@@ -193,7 +507,12 @@
 
 
 
-/* FOOTER */
+
+
+/* =====================
+FOOTER
+===================== */
+
 
 .copyright{
 
@@ -211,6 +530,10 @@
 
     font-size:14px;
 
+    font-weight:500;
+
+    letter-spacing:1px;
+
     z-index:10;
 
 }
@@ -219,7 +542,33 @@
 
 
 
-/* ANIMATION */
+/* =====================
+ANIMATION
+===================== */
+
+
+@keyframes fade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(40px);
+
+    }
+
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
 
 @keyframes zoom{
 
@@ -230,6 +579,7 @@
         transform:scale(.3);
 
     }
+
 
     to{
 
@@ -251,10 +601,76 @@
 
     }
 
+
     50%{
 
         transform:translateY(-15px);
 
     }
+
+}
+
+
+
+
+
+/* =====================
+RESPONSIVE
+===================== */
+
+
+@media(max-width:900px){
+
+
+.summary{
+
+    grid-template-columns:1fr;
+
+}
+
+
+
+.toolbar{
+
+    flex-direction:column;
+
+}
+
+
+
+.toolbar input,
+
+.toolbar button{
+
+    width:100%;
+
+}
+
+
+
+.winner-card{
+
+    width:90%;
+
+    padding:30px;
+
+}
+
+
+
+.winner-name{
+
+    font-size:42px;
+
+}
+
+
+
+.winner-card .logo{
+
+    width:220px;
+
+}
+
 
 }
