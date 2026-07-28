@@ -254,3 +254,11 @@ winnerBtn.onclick = async()=>{
 
 
 };
+
+const winnerBtn = document.getElementById("winnerBtn");
+
+winnerBtn.addEventListener("click", () => {
+
+    window.location.href = "winner.html";
+
+});
