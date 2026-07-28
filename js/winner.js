@@ -94,7 +94,7 @@ if(kandidat.length===0){
 
 document.getElementById("winnerName")
 .innerHTML =
-"SEMUA SUDAH MENANG";
+"SELESAI";
 
 
 return;
