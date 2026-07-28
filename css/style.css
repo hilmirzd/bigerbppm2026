@@ -15,6 +15,7 @@ body{
 
 }
 
+
 .background{
 
     position:fixed;
@@ -22,9 +23,20 @@ body{
     inset:0;
 
     background:
-    radial-gradient(circle at top,#2b1d00,#111 60%);
+    linear-gradient(
+        rgba(0,0,0,0.45),
+        rgba(0,0,0,0.45)
+    ),
+    url("background.png");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
 
 }
+
 
 .container{
 
@@ -41,6 +53,7 @@ body{
     z-index:2;
 
 }
+
 
 .card{
 
@@ -62,6 +75,7 @@ body{
 
 }
 
+
 .logo{
 
     width:320px;
@@ -69,6 +83,7 @@ body{
     margin-bottom:20px;
 
 }
+
 
 h2{
 
@@ -80,6 +95,7 @@ h2{
 
 }
 
+
 p{
 
     color:#ddd;
@@ -87,6 +103,7 @@ p{
     margin-bottom:30px;
 
 }
+
 
 input{
 
@@ -103,6 +120,7 @@ input{
     font-size:16px;
 
 }
+
 
 button{
 
@@ -128,6 +146,7 @@ button{
 
 }
 
+
 button:hover{
 
     transform:translateY(-3px);
@@ -135,6 +154,7 @@ button:hover{
     box-shadow:0 0 25px #F2C94C;
 
 }
+
 
 @keyframes fade{
 
@@ -156,11 +176,13 @@ button:hover{
 
 }
 
+
 .lucky-card{
 
     max-width:500px;
 
 }
+
 
 .welcome{
 
@@ -169,6 +191,7 @@ button:hover{
     margin-bottom:30px;
 
 }
+
 
 .number{
 
@@ -202,6 +225,7 @@ button:hover{
 
 }
 
+
 .number.active{
 
     transform:scale(1.08);
@@ -211,6 +235,7 @@ button:hover{
     0 0 50px #F2C94C;
 
 }
+
 
 #drawBtn{
 
