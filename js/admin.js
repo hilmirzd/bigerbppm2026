@@ -5,84 +5,252 @@ import {
     query,
     orderBy,
     onSnapshot,
+    getDocs,
+    deleteDoc,
     doc,
     setDoc
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-// =========================
-// ELEMENT
-// =========================
 
 const tableBody = document.getElementById("tableBody");
-const totalParticipant = document.getElementById("totalParticipant");
-const usedNumber = document.getElementById("usedNumber");
-const remainingNumber = document.getElementById("remainingNumber");
 
-const initBtn = document.getElementById("initBtn");
+const totalParticipant =
+document.getElementById("totalParticipant");
 
-// =========================
-// INITIALIZE 1-60
-// =========================
+const usedNumber =
+document.getElementById("usedNumber");
 
-initBtn.addEventListener("click", async () => {
+const remainingNumber =
+document.getElementById("remainingNumber");
 
-    if (!confirm("Initialize Lucky Number 1-60 ?")) return;
 
-    const numbers = [];
+const resetBtn =
+document.getElementById("resetBtn");
 
-    for (let i = 1; i <= 60; i++) {
-        numbers.push(i);
-    }
+const winnerBtn =
+document.getElementById("winnerBtn");
 
-    await setDoc(
-        doc(db, "config", "lottery"),
-        {
-            availableNumbers: numbers
-        }
-    );
 
-    alert("Initialize berhasil.");
 
-});
+/* =====================
+   LOAD DATA
+===================== */
 
-// =========================
-// TABLE
-// =========================
 
 const q = query(
-    collection(db, "participants"),
-    orderBy("createdAt", "asc")
+    collection(db,"participants"),
+    orderBy("createdAt","asc")
 );
 
-onSnapshot(q, (snapshot) => {
 
-    tableBody.innerHTML = "";
+onSnapshot(q,(snapshot)=>{
 
-    totalParticipant.textContent = snapshot.size;
-    usedNumber.textContent = snapshot.size;
-    remainingNumber.textContent = 60 - snapshot.size;
 
-    let no = 1;
+    tableBody.innerHTML="";
 
-    snapshot.forEach((docSnap) => {
 
-        const data = docSnap.data();
+    totalParticipant.innerHTML =
+    snapshot.size;
 
-        let waktu = "-";
 
-        if (data.createdAt) {
-            waktu = data.createdAt.toDate().toLocaleString("id-ID");
+    usedNumber.innerHTML =
+    snapshot.size;
+
+
+    remainingNumber.innerHTML =
+    60 - snapshot.size;
+
+
+
+    let no=1;
+
+
+    snapshot.forEach(docSnap=>{
+
+
+        const data =
+        docSnap.data();
+
+
+
+        let waktu="-";
+
+
+        if(data.createdAt){
+
+            waktu =
+            data.createdAt
+            .toDate()
+            .toLocaleString("id-ID");
+
         }
 
+
+
         tableBody.innerHTML += `
-            <tr>
-                <td>${no++}</td>
-                <td>${data.name}</td>
-                <td><strong>${data.luckyNumber}</strong></td>
-                <td>${waktu}</td>
-            </tr>
+
+        <tr>
+
+        <td>${no++}</td>
+
+        <td>${data.name}</td>
+
+        <td>
+        <b>${data.luckyNumber}</b>
+        </td>
+
+        <td>${waktu}</td>
+
+
+        </tr>
+
         `;
+
 
     });
 
+
 });
+
+
+
+
+/* =====================
+ RESET SEMUA
+===================== */
+
+
+resetBtn.onclick = async()=>{
+
+
+    const yakin =
+    confirm(
+    "Hapus semua peserta dan reset nomor?"
+    );
+
+
+    if(!yakin)
+    return;
+
+
+
+    // hapus peserta
+
+    const snapshot =
+    await getDocs(
+        collection(db,"participants")
+    );
+
+
+    for(const item of snapshot.docs){
+
+        await deleteDoc(
+            doc(
+            db,
+            "participants",
+            item.id
+            )
+        );
+
+    }
+
+
+
+    // reset nomor 1-60
+
+
+    const numbers=[];
+
+
+    for(let i=1;i<=60;i++){
+
+        numbers.push(i);
+
+    }
+
+
+
+    await setDoc(
+        doc(db,"config","lottery"),
+        {
+
+            availableNumbers:numbers
+
+        }
+
+    );
+
+
+
+    alert(
+    "Reset berhasil"
+    );
+
+
+};
+
+
+
+
+
+/* =====================
+ UNDI PEMENANG
+===================== */
+
+
+winnerBtn.onclick = async()=>{
+
+
+    const snapshot =
+    await getDocs(
+        collection(db,"participants")
+    );
+
+
+    const peserta=[];
+
+
+
+    snapshot.forEach(doc=>{
+
+        peserta.push(
+            doc.data()
+        );
+
+    });
+
+
+
+    if(peserta.length===0){
+
+        alert(
+        "Belum ada peserta"
+        );
+
+        return;
+
+    }
+
+
+
+    const random =
+
+    peserta[
+        Math.floor(
+        Math.random()*peserta.length
+        )
+    ];
+
+
+
+    alert(
+
+    "🏆 PEMENANG\n\n"+
+    random.name+
+    "\nLucky Number : "+
+    random.luckyNumber
+
+    );
+
+
+};
