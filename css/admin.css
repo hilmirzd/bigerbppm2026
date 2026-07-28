@@ -171,3 +171,178 @@ table{
 }
 
 }
+
+/* =====================
+ WINNER PAGE
+===================== */
+
+
+.winner-card{
+
+    width:650px;
+
+    padding:50px;
+
+    border-radius:30px;
+
+    background:rgba(255,255,255,.10);
+
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.2);
+
+    text-align:center;
+
+    animation:fade .8s;
+
+}
+
+
+
+.trophy{
+
+    font-size:80px;
+
+    animation:bounce 1.5s infinite;
+
+}
+
+
+
+.winner-card h1{
+
+    color:#F2C94C;
+
+    font-size:42px;
+
+    font-weight:800;
+
+}
+
+
+
+.winner-card h2{
+
+    color:white;
+
+    font-size:32px;
+
+    margin-bottom:30px;
+
+}
+
+
+
+.winner-name{
+
+    min-height:100px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:60px;
+
+    font-weight:800;
+
+    color:#F2C94C;
+
+    text-transform:uppercase;
+
+    margin:30px 0;
+
+    animation:zoom .6s;
+
+}
+
+
+
+.winner-number{
+
+    font-size:25px;
+
+    color:white;
+
+    margin-bottom:40px;
+
+}
+
+
+
+#drawWinner{
+
+    width:100%;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    background:#F2C94C;
+
+    color:#111;
+
+    font-size:22px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+}
+
+
+
+#drawWinner:hover{
+
+    transform:scale(1.05);
+
+    box-shadow:0 0 40px #F2C94C;
+
+}
+
+
+
+
+
+@keyframes zoom{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.3);
+
+    }
+
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+
+
+@keyframes bounce{
+
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+
+50%{
+
+transform:translateY(-20px);
+
+}
+
+
+}
