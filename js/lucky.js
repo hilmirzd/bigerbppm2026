@@ -1,11 +1,6 @@
-const participantName =
-document.getElementById("participantName");
-
-const numberDisplay =
-document.getElementById("numberDisplay");
-
-const drawBtn =
-document.getElementById("drawBtn");
+const participantName = document.getElementById("participantName");
+const numberDisplay = document.getElementById("numberDisplay");
+const drawBtn = document.getElementById("drawBtn");
 
 participantName.textContent =
 localStorage.getItem("participantName") || "-";
@@ -26,7 +21,7 @@ drawBtn.onclick = () => {
 
     },60);
 
-    setTimeout(()=>{
+    setTimeout(() => {
 
         clearInterval(interval);
 
@@ -34,10 +29,8 @@ drawBtn.onclick = () => {
         luckyNumber.padStart(2,"0");
 
         confetti({
-
             particleCount:250,
             spread:180
-
         });
 
         drawBtn.innerHTML="SELESAI";
