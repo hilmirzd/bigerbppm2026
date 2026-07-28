@@ -242,3 +242,23 @@ button:hover{
     margin-top:20px;
 
 }
+
+.copyright{
+
+    position:fixed;
+
+    bottom:15px;
+
+    width:100%;
+
+    text-align:center;
+
+    color:#F2C94C;
+
+    font-size:14px;
+
+    z-index:3;
+
+    letter-spacing:1px;
+
+}
