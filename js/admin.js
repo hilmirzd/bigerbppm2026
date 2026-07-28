@@ -1,62 +1,51 @@
 import { db } from "./firebase.js";
 
 import {
-
-collection,
-onSnapshot
-
+    collection,
+    query,
+    orderBy,
+    onSnapshot
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-const tableBody =
-document.getElementById("tableBody");
+const tableBody = document.getElementById("tableBody");
+const totalParticipant = document.getElementById("totalParticipant");
+const usedNumber = document.getElementById("usedNumber");
+const remainingNumber = document.getElementById("remainingNumber");
 
-const totalParticipant =
-document.getElementById("totalParticipant");
+const q = query(
+    collection(db, "participants"),
+    orderBy("createdAt", "asc")
+);
 
-const usedNumber =
-document.getElementById("usedNumber");
+onSnapshot(q, (snapshot) => {
 
-const remainingNumber =
-document.getElementById("remainingNumber");
+    tableBody.innerHTML = "";
 
-onSnapshot(
+    totalParticipant.textContent = snapshot.size;
+    usedNumber.textContent = snapshot.size;
+    remainingNumber.textContent = 100 - snapshot.size;
 
-collection(db,"participants"),
+    let no = 1;
 
-(snapshot)=>{
+    snapshot.forEach((docSnap) => {
 
-tableBody.innerHTML="";
+        const data = docSnap.data();
 
-let no=1;
+        let waktu = "-";
 
-snapshot.forEach(doc=>{
+        if (data.createdAt) {
+            waktu = data.createdAt.toDate().toLocaleString("id-ID");
+        }
 
-const data=doc.data();
+        tableBody.innerHTML += `
+            <tr>
+                <td>${no++}</td>
+                <td>${data.name}</td>
+                <td><strong>${data.luckyNumber}</strong></td>
+                <td>${waktu}</td>
+            </tr>
+        `;
 
-tableBody.innerHTML+=`
-
-<tr>
-
-<td>${no++}</td>
-
-<td>${data.name}</td>
-
-<td>${data.luckyNumber}</td>
-
-<td>${new Date(data.createdAt.seconds*1000).toLocaleString()}</td>
-
-</tr>
-
-`;
+    });
 
 });
-
-totalParticipant.innerHTML=snapshot.size;
-
-usedNumber.innerHTML=snapshot.size;
-
-remainingNumber.innerHTML=100-snapshot.size;
-
-}
-
-);
