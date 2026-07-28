@@ -262,3 +262,139 @@ button:hover{
     letter-spacing:1px;
 
 }
+/* =====================
+   MOBILE RESPONSIVE
+   INDEX & LUCKY PAGE
+===================== */
+
+@media(max-width:600px){
+
+
+.container{
+
+    width:100%;
+
+    min-height:100vh;
+
+    padding:20px;
+
+}
+
+
+
+.card{
+
+    width:100%;
+
+    max-width:360px;
+
+    padding:30px 25px;
+
+    border-radius:20px;
+
+}
+
+
+
+.logo{
+
+    width:220px;
+
+    margin-bottom:15px;
+
+}
+
+
+
+h2{
+
+    font-size:24px;
+
+    margin-bottom:10px;
+
+}
+
+
+
+p{
+
+    font-size:14px;
+
+    margin-bottom:20px;
+
+}
+
+
+
+input{
+
+    padding:14px;
+
+    font-size:15px;
+
+}
+
+
+
+button{
+
+    padding:14px;
+
+    font-size:16px;
+
+}
+
+
+
+.lucky-card{
+
+    max-width:360px;
+
+}
+
+
+
+.welcome{
+
+    margin-top:10px;
+
+    margin-bottom:20px;
+
+}
+
+
+
+/* Nomor Lucky */
+
+.number{
+
+    width:160px;
+
+    height:160px;
+
+    font-size:52px;
+
+    margin:20px auto;
+
+}
+
+
+
+#drawBtn{
+
+    margin-top:15px;
+
+}
+
+
+
+.copyright{
+
+    bottom:10px;
+
+    font-size:12px;
+
+}
+
+
+}
