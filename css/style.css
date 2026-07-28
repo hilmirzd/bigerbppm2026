@@ -435,3 +435,47 @@ button{
 
 
 }
+/* =====================
+   SCREENSHOT BUTTON ANIMATION
+===================== */
+
+
+#drawBtn.screenshot{
+
+    animation:orangePulse 1.2s infinite;
+
+    color:#111;
+
+}
+
+
+
+@keyframes orangePulse{
+
+    0%{
+
+        background:#F2C94C;
+
+        box-shadow:0 0 10px rgba(242,201,76,.5);
+
+    }
+
+
+    50%{
+
+        background:#F2994A;
+
+        box-shadow:0 0 30px rgba(242,153,74,.9);
+
+    }
+
+
+    100%{
+
+        background:#F2C94C;
+
+        box-shadow:0 0 10px rgba(242,201,76,.5);
+
+    }
+
+}
