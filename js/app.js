@@ -13,7 +13,10 @@ const startBtn = document.getElementById("startBtn");
 
 startBtn.addEventListener("click", async () => {
 
+    console.count("START BUTTON");
+
     const name = document.getElementById("name").value.trim();
+
 
     if (!name) {
         alert("Masukkan nama peserta.");
