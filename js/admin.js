@@ -52,3 +52,27 @@ onSnapshot(q, (snapshot) => {
     });
 
 });
+
+const resetBtn = document.getElementById("resetBtn");
+
+resetBtn.addEventListener("click", async () => {
+
+    const yakin = confirm(
+        "Yakin ingin menghapus seluruh peserta?"
+    );
+
+    if (!yakin) return;
+
+    const snapshot = await getDocs(collection(db, "participants"));
+
+    const promises = [];
+
+    snapshot.forEach((item) => {
+        promises.push(deleteDoc(doc(db, "participants", item.id)));
+    });
+
+    await Promise.all(promises);
+
+    alert("Semua data berhasil dihapus.");
+
+});
