@@ -398,3 +398,94 @@ button{
 
 
 }
+
+/* =====================
+   MOBILE SPACING FIX
+===================== */
+
+@media(max-width:600px){
+
+
+.card{
+
+    padding:35px 25px;
+
+}
+
+
+
+.logo{
+
+    width:200px;
+
+    margin-bottom:25px;
+
+}
+
+
+
+h2{
+
+    margin-bottom:20px;
+
+}
+
+
+
+p{
+
+    line-height:1.6;
+
+    margin-bottom:25px;
+
+}
+
+
+
+input{
+
+    margin-bottom:20px;
+
+}
+
+
+
+button{
+
+    margin-top:5px;
+
+}
+
+
+
+.lucky-card .welcome{
+
+    margin-top:15px;
+
+    margin-bottom:30px;
+
+}
+
+
+
+.number{
+
+    width:170px;
+
+    height:170px;
+
+    margin:30px auto;
+
+}
+
+
+
+#drawBtn{
+
+    margin-top:25px;
+
+}
+
+
+
+}
