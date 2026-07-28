@@ -33,7 +33,7 @@ drawBtn.onclick = () => {
             spread:180
         });
 
-        drawBtn.innerHTML="SELESAI";
+        drawBtn.innerHTML="SILAHKAN SCREENSHOT SEBAGAI BUKTI";
 
     },3000);
 
