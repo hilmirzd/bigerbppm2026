@@ -12,6 +12,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
+
 const tableBody = document.getElementById("tableBody");
 
 const totalParticipant =
@@ -27,13 +28,16 @@ document.getElementById("remainingNumber");
 const resetBtn =
 document.getElementById("resetBtn");
 
+
 const winnerBtn =
 document.getElementById("winnerBtn");
 
 
 
+
+
 /* =====================
-   LOAD DATA
+   LOAD DATA PESERTA
 ===================== */
 
 
@@ -41,6 +45,7 @@ const q = query(
     collection(db,"participants"),
     orderBy("createdAt","asc")
 );
+
 
 
 onSnapshot(q,(snapshot)=>{
@@ -65,6 +70,7 @@ onSnapshot(q,(snapshot)=>{
     let no=1;
 
 
+
     snapshot.forEach(docSnap=>{
 
 
@@ -74,6 +80,7 @@ onSnapshot(q,(snapshot)=>{
 
 
         let waktu="-";
+
 
 
         if(data.createdAt){
@@ -101,7 +108,6 @@ onSnapshot(q,(snapshot)=>{
 
         <td>${waktu}</td>
 
-
         </tr>
 
         `;
@@ -115,8 +121,11 @@ onSnapshot(q,(snapshot)=>{
 
 
 
+
+
+
 /* =====================
- RESET SEMUA
+ RESET SEMUA DATA
 ===================== */
 
 
@@ -134,32 +143,38 @@ resetBtn.onclick = async()=>{
 
 
 
-    // hapus peserta
-
     const snapshot =
     await getDocs(
         collection(db,"participants")
     );
 
 
+
     for(const item of snapshot.docs){
 
+
         await deleteDoc(
+
             doc(
             db,
             "participants",
             item.id
             )
+
         );
+
 
     }
 
 
 
-    // reset nomor 1-60
+
+
+    // reset lucky number 1-60
 
 
     const numbers=[];
+
 
 
     for(let i=1;i<=60;i++){
@@ -171,10 +186,16 @@ resetBtn.onclick = async()=>{
 
 
     await setDoc(
-        doc(db,"config","lottery"),
+
+        doc(
+        db,
+        "config",
+        "lottery"
+        ),
+
         {
 
-            availableNumbers:numbers
+        availableNumbers:numbers
 
         }
 
@@ -193,72 +214,18 @@ resetBtn.onclick = async()=>{
 
 
 
+
+
 /* =====================
- UNDI PEMENANG
+ MENU UNDIA PEMENANG
 ===================== */
 
 
-winnerBtn.onclick = async()=>{
+winnerBtn.onclick = ()=>{
 
 
-    const snapshot =
-    await getDocs(
-        collection(db,"participants")
-    );
-
-
-    const peserta=[];
-
-
-
-    snapshot.forEach(doc=>{
-
-        peserta.push(
-            doc.data()
-        );
-
-    });
-
-
-
-    if(peserta.length===0){
-
-        alert(
-        "Belum ada peserta"
-        );
-
-        return;
-
-    }
-
-
-
-    const random =
-
-    peserta[
-        Math.floor(
-        Math.random()*peserta.length
-        )
-    ];
-
-
-
-    alert(
-
-    "🏆 PEMENANG\n\n"+
-    random.name+
-    "\nLucky Number : "+
-    random.luckyNumber
-
-    );
+    window.location.href =
+    "winner.html";
 
 
 };
-
-const winnerBtn = document.getElementById("winnerBtn");
-
-winnerBtn.addEventListener("click", () => {
-
-    window.location.href = "winner.html";
-
-});
