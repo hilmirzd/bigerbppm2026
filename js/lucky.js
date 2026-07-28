@@ -23,18 +23,24 @@ drawBtn.onclick = () => {
 
     setTimeout(() => {
 
-        clearInterval(interval);
+    clearInterval(interval);
 
-        numberDisplay.innerHTML =
-        luckyNumber.padStart(2,"0");
+    numberDisplay.innerHTML =
+    luckyNumber.padStart(2,"0");
 
-        confetti({
-            particleCount:250,
-            spread:180
-        });
+    confetti({
+        particleCount:250,
+        spread:180
+    });
 
-        drawBtn.innerHTML="📸 SILAHKAN SCREENSHOT 📸";
 
-    },3000);
+    drawBtn.innerHTML="📸 SILAHKAN SCREENSHOT 📸";
+
+
+    // aktifkan animasi tombol
+    drawBtn.classList.add("screenshot");
+
+
+},3000);
 
 };
