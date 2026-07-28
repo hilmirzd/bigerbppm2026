@@ -5,9 +5,8 @@ import {
     query,
     orderBy,
     onSnapshot,
-    getDocs,
-    deleteDoc,
-    doc
+    doc,
+    updateDoc
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const tableBody = document.getElementById("tableBody");
@@ -74,5 +73,32 @@ resetBtn.addEventListener("click", async () => {
     await Promise.all(promises);
 
     alert("Semua data berhasil dihapus.");
+
+});
+
+const initBtn = document.getElementById("initBtn");
+
+initBtn.addEventListener("click", async () => {
+
+    const ok = confirm(
+        "Initialize Lucky Number 1-60?"
+    );
+
+    if (!ok) return;
+
+    const numbers = [];
+
+    for (let i = 1; i <= 60; i++) {
+        numbers.push(i);
+    }
+
+    await updateDoc(
+        doc(db, "config", "lottery"),
+        {
+            availableNumbers: numbers
+        }
+    );
+
+    alert("Lucky Number berhasil diinitialize.");
 
 });
