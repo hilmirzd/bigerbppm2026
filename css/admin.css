@@ -239,3 +239,26 @@
     }
 
 }
+.copyright{
+
+    position:fixed;
+
+    bottom:15px;
+
+    left:0;
+
+    width:100%;
+
+    text-align:center;
+
+    color:#F2C94C;
+
+    font-size:14px;
+
+    font-family:'Poppins',sans-serif;
+
+    letter-spacing:1px;
+
+    z-index:10;
+
+}
