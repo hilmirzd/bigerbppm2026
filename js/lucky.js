@@ -33,7 +33,7 @@ drawBtn.onclick = () => {
             spread:180
         });
 
-        drawBtn.innerHTML="SILAHKAN SCREENSHOT";
+        drawBtn.innerHTML="📸 SILAHKAN SCREENSHOT 📸";
 
     },3000);
 
